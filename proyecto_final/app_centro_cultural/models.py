@@ -26,6 +26,12 @@ class Usuario(models.Model):
     email = models.EmailField()
     def __str__(self):
         return self.nombre
+    
+class Inscripcion(models.Model):
+    actividad=models.ForeignKey(Actividad, on_delete=models.CASCADE)
+    usuario=models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.nombre
 
 
 class Sala(models.Model):
