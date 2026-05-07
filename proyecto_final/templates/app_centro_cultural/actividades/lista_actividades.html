@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+    <h1>Actividades disponibles</h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+
+                <th>Id</th>
+                <th>Actividad</th>
+                <th>Plazas Disponibles</th>
+                <th>Horario</th>
+                <th>Duraccion</th>
+                <th>Monitor</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for actividad in actividades %}
+            <tr>
+                <td>{{ actividad.id }}</td>
+                <td><a href="{% url 'detalle_actividad' actividad.id %}">{{ actividad.nombre }}</a></td>
+                <td>{{ actividad.plazas_disponibles }}</td>
+                <td>{{ actividad.horario }}</td>
+                <td>{{ actividad.duraccion }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+</html>
