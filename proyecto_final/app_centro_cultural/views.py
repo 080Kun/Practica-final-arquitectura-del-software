@@ -11,17 +11,19 @@ from .forms import ActividadForm, UsuarioForm, MonitorForm, SalaForm
 #Actividad
 def lista_actividades(request):
     actividades = Actividad.objects.all() 
-    return render(request, 'app_centro_cultural/lista_actividades.html', {'actividades': actividades})
+    return render(request, 'app_centro_cultural/actividades/lista_actividades.html', {'actividades': actividades})
 
 def detalle_actividad(request, actividad_id):
     try:
         actividad = Actividad.objects.get(id=actividad_id)
-        monitor = Monitor.objects.get(monitor=monitor)
+        monitor = Monitor.objects.get(id=actividad.monitor_id)
+        #sala = Sala.objects.get(id=actividad.sala_id)
         contexto = {
             'actividad': actividad,
             'monitor': monitor,
+            #'sala': sala
         }
-        return render(request, 'app_centro_cultural/detalle_Actividad.html', contexto)
+        return render(request, 'app_centro_cultural/actividades/detalle_actividad.html', contexto)
     except Actividad.DoesNotExist:
         return JsonResponse({"error": "Actividad no encontrado"}, status=404)
     
@@ -34,7 +36,7 @@ def nueva_actividad(request):
             return redirect('lista_actividades')
     else:
         form = ActividadForm()
-    return render(request, 'app_centro_cultural/formulario.html', {'form': form, 'titulo': 'Nueva Actividad'})
+    return render(request, 'app_centro_cultural/actividades/formulario.html', {'form': form, 'titulo': 'Nueva Actividad'})
 
 
 @csrf_exempt
@@ -49,7 +51,7 @@ def editar_actividad(request, actividad_id):
                 return redirect('lista_actividades')
         else:
             form = ActividadForm()
-        return render(request, 'app_centro_cultural/formulario_put.html', {'form': form, 'titulo': 'Actualizar Actividad'})
+        return render(request, 'app_centro_cultural/actividades/formulario_put.html', {'form': form, 'titulo': 'Actualizar Actividad'})
 
     except Actividad.DoesNotExist:
         return JsonResponse({"error": "Actividad no encontrado"}, status=404)
@@ -70,12 +72,12 @@ def eliminar_actividad(request, actividad_id):
 #Usuario
 def lista_usuarios(request):
     usuarios = Usuario.objects.all() 
-    return render(request, 'app_centro_cultural/lista_usuarios.html', {'usuarios': usuarios})
+    return render(request, 'app_centro_cultural/usuarios/lista_usuarios.html', {'usuarios': usuarios})
 
 def detalle_usuario(request, usuario_id):
     try:
         usuario = Usuario.objects.get(id=usuario_id)
-        return render(request, 'app_centro_cultural/detalle_Actividad.html', usuario)
+        return render(request, 'app_centro_cultural/usuarios/detalle_usuario.html', {'usuario': usuario})
     except Usuario.DoesNotExist:
         return JsonResponse({"error": "Usuario no encontrado"}, status=404)
     
@@ -88,7 +90,7 @@ def nuevo_usuario(request):
             return redirect('lista_usuarios')
     else:
         form = UsuarioForm()
-    return render(request, 'app_centro_cultural/formulario.html', {'form': form, 'titulo': 'Nuevo Usuario'})
+    return render(request, 'app_centro_cultural/usuarios/formulario.html', {'form': form, 'titulo': 'Nuevo Usuario'})
 
 
 @csrf_exempt
@@ -103,7 +105,7 @@ def editar_usuario(request, usuario_id):
                 return redirect('lista_usuarios')
         else:
             form = UsuarioForm()
-        return render(request, 'app_centro_cultural/formulario_put.html', {'form': form, 'titulo': 'Actualizar Usuario'})
+        return render(request, 'app_centro_cultural/usuarios/formulario_put.html', {'form': form, 'titulo': 'Actualizar Usuario'})
 
     except Usuario.DoesNotExist:
         return JsonResponse({"error": "Usuario no encontrado"}, status=404)

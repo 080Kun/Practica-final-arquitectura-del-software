@@ -6,6 +6,13 @@ class Monitor(models.Model):
     especializacioin = models.CharField(max_length=100)
     def __str__(self):
         return self.nombre
+    
+class Sala(models.Model):
+    nombre = models.CharField(max_length=100)
+    capacidad = models.IntegerField()
+    ubicacion = models.CharField(max_length=100)
+    def __str__(self):
+        return self.nombre
 
 class Actividad(models.Model):
     nombre = models.CharField(max_length=100)
@@ -15,6 +22,7 @@ class Actividad(models.Model):
     duración = models.IntegerField()
     plazas_disponibles = models.IntegerField()
     monitor = models.ForeignKey(Monitor, on_delete=models.CASCADE)
+    #sala = models.ForeignKey(Sala, on_delete=models.CASCADE)
     def __str__(self):
         return f"{self.nombre}: {self.descripción}"
 
@@ -31,12 +39,4 @@ class Inscripcion(models.Model):
     actividad=models.ForeignKey(Actividad, on_delete=models.CASCADE)
     usuario=models.ForeignKey(Usuario, on_delete=models.CASCADE)
 
-
-
-class Sala(models.Model):
-    nombre = models.CharField(max_length=100)
-    capacidad = models.IntegerField()
-    ubicacion = models.CharField(max_length=100)
-    def __str__(self):
-        return self.nombre
 

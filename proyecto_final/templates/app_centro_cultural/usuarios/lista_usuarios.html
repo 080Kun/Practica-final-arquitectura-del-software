@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+    <h1>Usuarios registrados</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for usuario in usuarios %}
+            <tr>
+                <td>{{ usuario.id }}</td>
+                <td>
+                    <a href="{% url 'detalle_usuario' usuario.id %}">
+                        {{ usuario.nombre }}
+                    </a>
+                </td>
+                <td>{{ usuario.email }}</td>
+                <td>{{ usuario.telefono }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</html>
