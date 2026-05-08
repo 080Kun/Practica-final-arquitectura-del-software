@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+    <h1>Salas disponibles</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Capacidad</th>
+                <th>Ubicación</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sala in salas %}
+            <tr>
+                <td>{{ sala.id }}</td>
+                <td>
+                    <a href="{% url 'detalle_sala' sala.id %}">
+                        {{ sala.nombre }}
+                    </a>
+                </td>
+                <td>{{ sala.capacidad }}</td>
+                <td>{{ sala.ubicacion }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</html>
