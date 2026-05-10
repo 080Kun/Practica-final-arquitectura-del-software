@@ -36,7 +36,7 @@ def nueva_actividad(request):
             return redirect('lista_actividades')
     else:
         form = ActividadForm()
-    return render(request, 'app_centro_cultural/actividades/formulario.html', {'form': form, 'titulo': 'Nueva Actividad'})
+    return render(request, 'app_centro_cultural/formulario.html', {'form': form, 'titulo': 'Nueva Actividad'})
 
 
 @csrf_exempt
@@ -51,7 +51,7 @@ def editar_actividad(request, actividad_id):
                 return redirect('lista_actividades')
         else:
             form = ActividadForm()
-        return render(request, 'app_centro_cultural/actividades/formulario_put.html', {'form': form, 'titulo': 'Actualizar Actividad'})
+        return render(request, 'app_centro_cultural/formulario_put.html', {'form': form, 'titulo': 'Actualizar Actividad'})
 
     except Actividad.DoesNotExist:
         return JsonResponse({"error": "Actividad no encontrado"}, status=404)
@@ -90,7 +90,7 @@ def nuevo_usuario(request):
             return redirect('lista_usuarios')
     else:
         form = UsuarioForm()
-    return render(request, 'app_centro_cultural/usuarios/formulario.html', {'form': form, 'titulo': 'Nuevo Usuario'})
+    return render(request, 'app_centro_cultural/formulario.html', {'form': form, 'titulo': 'Nuevo Usuario'})
 
 
 @csrf_exempt
@@ -105,7 +105,7 @@ def editar_usuario(request, usuario_id):
                 return redirect('lista_usuarios')
         else:
             form = UsuarioForm()
-        return render(request, 'app_centro_cultural/usuarios/formulario_put.html', {'form': form, 'titulo': 'Actualizar Usuario'})
+        return render(request, 'app_centro_cultural/formulario_put.html', {'form': form, 'titulo': 'Actualizar Usuario'})
 
     except Usuario.DoesNotExist:
         return JsonResponse({"error": "Usuario no encontrado"}, status=404)
@@ -152,7 +152,7 @@ def nuevo_monitor(request):
     else:
         form = MonitorForm()
 
-    return render(request, 'app_centro_cultural/monitores/formulario.html', {
+    return render(request, 'app_centro_cultural/formulario.html', {
         'form': form,
         'titulo': 'Nuevo Monitor'
     })
@@ -170,7 +170,7 @@ def editar_monitor(request, monitor_id):
         else:
             form = MonitorForm(instance=monitor)
 
-        return render(request, 'app_centro_cultural/monitores/formulario_put.html', {
+        return render(request, 'app_centro_cultural/formulario_put.html', {
             'form': form,
             'titulo': 'Actualizar Monitor'
         })
@@ -217,7 +217,7 @@ def nueva_sala(request):
     else:
         form = SalaForm()
 
-    return render(request, 'app_centro_cultural/salas/formulario.html', {
+    return render(request, 'app_centro_cultural/formulario.html', {
         'form': form,
         'titulo': 'Nueva Sala'
     })
@@ -235,7 +235,7 @@ def editar_sala(request, sala_id):
                 return redirect('lista_salas')
         else:
             form = SalaForm(instance=sala)
-        return render(request, 'app_centro_cultural/salas/formulario_put.html', {
+        return render(request, 'app_centro_cultural/formulario_put.html', {
             'form': form,
             'titulo': 'Actualizar Sala'
         })

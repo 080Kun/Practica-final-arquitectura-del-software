@@ -11,7 +11,6 @@
                 <th>Plazas Disponibles</th>
                 <th>Horario</th>
                 <th>Duraccion</th>
-                <th>Monitor</th>
             </tr>
         </thead>
         <tbody>
@@ -21,7 +20,7 @@
                 <td><a href="{% url 'detalle_actividad' actividad.id %}">{{ actividad.nombre }}</a></td>
                 <td>{{ actividad.plazas_disponibles }}</td>
                 <td>{{ actividad.horario }}</td>
-                <td>{{ actividad.duraccion }}</td>
+                <td>{{ actividad.duración }}</td>
             </tr>
             {% endfor %}
         </tbody>
