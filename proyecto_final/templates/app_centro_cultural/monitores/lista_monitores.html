@@ -8,6 +8,8 @@
                 <th>Nombre</th>
                 <th>Número de Actividades</th>
                 <th>Especialización</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
             </tr>
         </thead>
 
@@ -22,9 +24,14 @@
                 </td>
                 <td>{{ monitor.numActividades }}</td>
                 <td>{{ monitor.especializacioin }}</td>
+                <td><a href="{% url 'editar_monitor' monitor.id %}">Editar </a></td>
+                <td><a href="{% url 'eliminar_monitor' monitor.id %}">Borrar</a></td>
             </tr>
             {% endfor %}
         </tbody>
-    </table>
+    </table> 
+
+    <a href="{% url 'nuevo_monitor' %}">Añadir nuevo monitor</a>
+    <br>
 
 </html>

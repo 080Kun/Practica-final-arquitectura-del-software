@@ -44,14 +44,14 @@ def editar_actividad(request, actividad_id):
     try:
         actividad = Actividad.objects.get(id=actividad_id)
         
-        if request.method == 'PUT':
-            form = ActividadForm(request.PUT,instance=actividad)
+        if request.method == 'POST':
+            form = ActividadForm(request.POST,instance=actividad)
             if form.is_valid():
                 form.save()
                 return redirect('lista_actividades')
         else:
             form = ActividadForm()
-        return render(request, 'app_centro_cultural/formulario_put.html', {'form': form, 'titulo': 'Actualizar Actividad'})
+        return render(request, 'app_centro_cultural/formulario.html', {'form': form, 'titulo': 'Actualizar Actividad'})
 
     except Actividad.DoesNotExist:
         return JsonResponse({"error": "Actividad no encontrado"}, status=404)
@@ -62,7 +62,7 @@ def eliminar_actividad(request, actividad_id):
     try:
         actividad = Actividad.objects.get(id=actividad_id)
         
-        if request.method == 'DELETE':
+        if request.method == 'GET':
             actividad.delete()
             return redirect('lista_actividades')
     except Actividad.DoesNotExist:
@@ -98,14 +98,14 @@ def editar_usuario(request, usuario_id):
     try:
         usuario = Usuario.objects.get(id=usuario_id)
         
-        if request.method == 'PUT':
-            form = UsuarioForm(request.PUT,instance=usuario)
+        if request.method == 'POST':
+            form = UsuarioForm(request.POST,instance=usuario)
             if form.is_valid():
                 form.save()
                 return redirect('lista_usuarios')
         else:
             form = UsuarioForm()
-        return render(request, 'app_centro_cultural/formulario_put.html', {'form': form, 'titulo': 'Actualizar Usuario'})
+        return render(request, 'app_centro_cultural/formulario.html', {'form': form, 'titulo': 'Actualizar Usuario'})
 
     except Usuario.DoesNotExist:
         return JsonResponse({"error": "Usuario no encontrado"}, status=404)
@@ -119,7 +119,7 @@ def eliminar_usuario(request, usuario_id):
     try:
         usuario = Usuario.objects.get(id=usuario_id)
         
-        if request.method == 'DELETE':
+        if request.method == 'GET':
             usuario.delete()
             return redirect('lista_usuarios')
     except Usuario.DoesNotExist:
@@ -170,7 +170,7 @@ def editar_monitor(request, monitor_id):
         else:
             form = MonitorForm(instance=monitor)
 
-        return render(request, 'app_centro_cultural/formulario_put.html', {
+        return render(request, 'app_centro_cultural/formulario.html', {
             'form': form,
             'titulo': 'Actualizar Monitor'
         })
@@ -183,7 +183,7 @@ def editar_monitor(request, monitor_id):
 def eliminar_monitor(request, monitor_id):
     try:
         monitor = Monitor.objects.get(id=monitor_id)
-        if request.method == 'POST':
+        if request.method == 'GET':
             monitor.delete()
             return redirect('lista_monitores')
     except Monitor.DoesNotExist:
@@ -235,7 +235,7 @@ def editar_sala(request, sala_id):
                 return redirect('lista_salas')
         else:
             form = SalaForm(instance=sala)
-        return render(request, 'app_centro_cultural/formulario_put.html', {
+        return render(request, 'app_centro_cultural/formulario.html', {
             'form': form,
             'titulo': 'Actualizar Sala'
         })
@@ -247,7 +247,7 @@ def editar_sala(request, sala_id):
 def eliminar_sala(request, sala_id):
     try:
         sala = Sala.objects.get(id=sala_id)
-        if request.method == 'POST':
+        if request.method == 'GET':
             sala.delete()
             return redirect('lista_salas')
     except Sala.DoesNotExist:

@@ -1,8 +1,0 @@
-{% block content %}
-  <h2>{{ titulo }}</h2>
-  <form method="put">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Guardar</button>
-  </form>
-{% endblock %}
