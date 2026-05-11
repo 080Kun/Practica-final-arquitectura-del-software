@@ -16,7 +16,7 @@
             {% for inscripcion in inscripciones %}
             <tr>
                 <td>{{ inscripcion.id }}</td>
-                <td>{{ inscripcion.usuario.nombre }}</td>
+                <td><a href="{% url 'detalle_usuario' inscripcion.usuario.id %}">{{ inscripcion.usuario.nombre }}</a></td>
                 <td>{{ inscripcion.usuario.email }}</td>
                 <td><a href="{% url 'eliminar_inscripciones' actividad.id inscripcion.usuario.id %}">Borrar </a></td>
             </tr>

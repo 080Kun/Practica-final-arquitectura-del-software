@@ -275,12 +275,15 @@ def nueva_inscripcion(request,actividad_id):
             form = InscripcionForm(request.POST)
             if form.is_valid():
                 inscripcion = form.save(commit=False)
+                existe = Inscripcion.objects.filter(actividad=inscripcion.actividad, usuario= inscripcion.usuario).exists()
+                if existe:
+                    return JsonResponse({"error": "Inscripcion ya realizada"}, status=400)
                 inscripcion.actividad = actividad
                 inscripcion.save()
                 return redirect('lista_actividades')
         else:
             form = InscripcionForm()
-        return render(request, 'app_centro_cultural/formulario.html', {'form': form, 'titulo': 'Nueva Inscripcion'})
+        return render(request, 'app_centro_cultural/formulario.html', {'form': form, 'titulo': 'Nueva Inscripcion para ' + actividad.nombre})
     except Actividad.DoesNotExist:
         return JsonResponse({"error": "Actividad no encontrado"}, status=404)
     
@@ -297,3 +300,8 @@ def eliminar_inscripciones(request, actividad_id, usuario_id):
     except Inscripcion.DoesNotExist:
         return JsonResponse({"error": "Inscripcion no encontrado"}, status=404)
 
+
+
+#Indice
+def index(request):
+    return render(request, 'app_centro_cultural/index.html')

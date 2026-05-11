@@ -30,7 +30,7 @@ class Actividad(models.Model):
 
         if nuevaActividad:
             self.monitor.numActividades += 1
-            self.monitor.save()
+            self.monitor.save()       
 
     def __str__(self):
         return f"{self.nombre}: {self.descripción}"
@@ -58,4 +58,7 @@ class Inscripcion(models.Model):
                 raise ValueError("No quedan plazas disponibles")
 
         super().save(*args, **kwargs)
-
+    
+    def delete(self, *args, **kwargs):
+        self.actividad.plazas_disponibles += 1
+        self.actividad.save()

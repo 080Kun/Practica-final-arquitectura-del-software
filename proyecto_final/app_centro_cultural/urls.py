@@ -4,6 +4,7 @@ from .views import lista_usuarios, detalle_usuario,editar_usuario,eliminar_usuar
 from .views import lista_monitores, detalle_monitor,editar_monitor,eliminar_monitor,nuevo_monitor
 from .views import lista_salas, detalle_sala,editar_sala,eliminar_sala,nueva_sala
 from .views import lista_inscripciones, nueva_inscripcion, eliminar_inscripciones
+from .views import index
 
 
 urlpatterns = [
@@ -30,6 +31,8 @@ urlpatterns = [
     path('actividades/<actividad_id>/inscripciones', lista_inscripciones, name='lista_inscripciones'),
     path('actividades/<actividad_id>/inscribir', nueva_inscripcion, name='nueva_inscripcion'),
     path('actividades/<actividad_id>/inscripciones/<usuario_id>/eliminar', eliminar_inscripciones, name='eliminar_inscripciones'),
+    path('', index, name='index'), 
+
  
 ]
 

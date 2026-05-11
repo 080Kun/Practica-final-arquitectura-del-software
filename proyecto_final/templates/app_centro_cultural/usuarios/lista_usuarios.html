@@ -8,6 +8,8 @@
                 <th>Nombre</th>
                 <th>Email</th>
                 <th>Teléfono</th>
+                <th>Editar</th>
+                <th>Eliminar</th> 
             </tr>
         </thead>
 
@@ -22,8 +24,13 @@
                 </td>
                 <td>{{ usuario.email }}</td>
                 <td>{{ usuario.telefono }}</td>
+                <td><a href="{% url 'editar_usuario' usuario.id %}">Editar </a></td>
+                <td><a href="{% url 'eliminar_usuario' usuario.id %}">Borrar </a></td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+
+    <a href="{% url 'nuevo_usuario' %}">Añadir nuevo usuario</a>
+    <br>
 </html>
