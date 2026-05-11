@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+    <h1>{{ actividad.nombre }}</h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+
+                <th>Id</th>
+                <th>Usuario</th>
+                <th>Email</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for inscripcion in inscripciones %}
+            <tr>
+                <td>{{ inscripcion.id }}</td>
+                <td>{{ inscripcion.usuario.nombre }}</td>
+                <td>{{ inscripcion.usuario.email }}</td>
+                <td><a href="{% url 'eliminar_inscripciones' actividad.id inscripcion.usuario.id %}">Borrar </a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>

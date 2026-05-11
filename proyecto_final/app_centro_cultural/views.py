@@ -5,7 +5,7 @@ from django.utils.decorators import method_decorator
 import json
 from .models import Actividad, Inscripcion, Usuario, Monitor, Sala
 from django.shortcuts import render, redirect
-from .forms import ActividadForm, UsuarioForm, MonitorForm, SalaForm
+from .forms import ActividadForm, UsuarioForm, MonitorForm, SalaForm, InscripcionForm
 
 
 #Actividad
@@ -252,3 +252,47 @@ def eliminar_sala(request, sala_id):
             return redirect('lista_salas')
     except Sala.DoesNotExist:
         return JsonResponse({"error": "Sala no encontrada"}, status=404)
+    
+    
+#Inscripciones
+def lista_inscripciones(request, actividad_id):
+    try:
+        actividad = Actividad.objects.get(id=actividad_id)
+        inscripciones = Inscripcion.objects.filter(actividad=actividad)
+        contexto = {
+            'actividad': actividad,
+            'inscripciones': inscripciones,
+        }
+        return render(request, 'app_centro_cultural/inscripciones/lista_inscripciones.html', contexto)
+    except Actividad.DoesNotExist:
+        return JsonResponse({"error": "Actividad no encontrado"}, status=404)
+    
+@csrf_exempt
+def nueva_inscripcion(request,actividad_id):
+    try:
+        actividad = Actividad.objects.get(id=actividad_id)
+        if request.method == 'POST':
+            form = InscripcionForm(request.POST)
+            if form.is_valid():
+                inscripcion = form.save()
+                inscripcion.actividad = actividad
+                return redirect('lista_actividades')
+        else:
+            form = InscripcionForm()
+        return render(request, 'app_centro_cultural/formulario.html', {'form': form, 'titulo': 'Nueva Inscripcion'})
+    except Actividad.DoesNotExist:
+        return JsonResponse({"error": "Actividad no encontrado"}, status=404)
+    
+
+@csrf_exempt
+def eliminar_inscripciones(request, actividad_id, usuario_id):
+    
+    try:
+        inscripcion = Inscripcion.objects.get(actividad=actividad_id, usuario=usuario_id)
+        
+        if request.method == 'GET':
+            inscripcion.delete()
+            return redirect('lista_actividades')
+    except Inscripcion.DoesNotExist:
+        return JsonResponse({"error": "Inscripcion no encontrado"}, status=404)
+

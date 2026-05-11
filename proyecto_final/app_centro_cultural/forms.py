@@ -1,5 +1,5 @@
 from django import forms
-from .models import Actividad, Usuario,Monitor,Sala
+from .models import Actividad, Usuario,Monitor,Sala, Inscripcion
 
 class ActividadForm(forms.ModelForm):
     class Meta:
@@ -20,3 +20,10 @@ class SalaForm(forms.ModelForm):
     class Meta:
         model = Sala
         fields = '__all__'
+
+class InscripcionForm(forms.ModelForm):
+    class Meta:
+        model = Inscripcion
+        fields = '__all__'
+        
+

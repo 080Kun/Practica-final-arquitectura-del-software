@@ -3,6 +3,7 @@ from .views import lista_actividades, detalle_actividad,editar_actividad,elimina
 from .views import lista_usuarios, detalle_usuario,editar_usuario,eliminar_usuario,nuevo_usuario
 from .views import lista_monitores, detalle_monitor,editar_monitor,eliminar_monitor,nuevo_monitor
 from .views import lista_salas, detalle_sala,editar_sala,eliminar_sala,nueva_sala
+from .views import lista_inscripciones, nueva_inscripcion, eliminar_inscripciones
 
 
 urlpatterns = [
@@ -26,6 +27,10 @@ urlpatterns = [
     path('salas/<sala_id>/', detalle_sala, name='detalle_sala'),
     path('salas/<sala_id>/editar', editar_sala, name='editar_sala'),
     path('salas/<sala_id>/eliminar', eliminar_sala, name='eliminar_sala'),
+    path('actividades/<actividad_id>/inscripciones', lista_inscripciones, name='lista_inscripciones'),
+    path('actividades/<actividad_id>/inscribir', nueva_inscripcion, name='nueva_inscripcion'),
+    path('actividades/<actividad_id>/inscripciones/<usuario_id>/eliminar', eliminar_inscripciones, name='eliminar_inscripciones'),
+ 
 ]
 
 
