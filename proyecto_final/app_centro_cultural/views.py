@@ -17,11 +17,11 @@ def detalle_actividad(request, actividad_id):
     try:
         actividad = Actividad.objects.get(id=actividad_id)
         monitor = Monitor.objects.get(id=actividad.monitor_id)
-        #sala = Sala.objects.get(id=actividad.sala_id)
+        sala = Sala.objects.get(id=actividad.sala_id)
         contexto = {
             'actividad': actividad,
             'monitor': monitor,
-            #'sala': sala
+            'sala': sala
         }
         return render(request, 'app_centro_cultural/actividades/detalle_actividad.html', contexto)
     except Actividad.DoesNotExist:
