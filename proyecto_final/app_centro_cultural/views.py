@@ -274,8 +274,9 @@ def nueva_inscripcion(request,actividad_id):
         if request.method == 'POST':
             form = InscripcionForm(request.POST)
             if form.is_valid():
-                inscripcion = form.save()
+                inscripcion = form.save(commit=False)
                 inscripcion.actividad = actividad
+                inscripcion.save()
                 return redirect('lista_actividades')
         else:
             form = InscripcionForm()
