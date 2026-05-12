@@ -3,6 +3,7 @@
     <h1>{{ actividad.nombre }}</h1>
     <p><b>Horario:</b> {{ actividad.horario }}</p>
     <p><b>Duraccion:</b> {{ actividad.duración }}</p>
+    <p><b>Tipo:</b> {{ actividad.tipo }}</p>
     <p><b>Monitor:</b><a href="{% url 'detalle_monitor' monitor.id %}">{{ monitor.nombre}} </a></p>
     <p><b>Descripción:</b> {{ actividad.descripción }}</p>
     <p><b>Sala Principal:</b>{{ sala.nombre}}</p>

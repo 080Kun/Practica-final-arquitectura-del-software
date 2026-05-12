@@ -305,3 +305,42 @@ def eliminar_inscripciones(request, actividad_id, usuario_id):
 #Indice
 def index(request):
     return render(request, 'app_centro_cultural/index.html')
+
+
+def mostrar_actividades_tipos(request):
+    actividades = Actividad.objects.all()
+    tipo = request.GET.get('tipo')
+
+    if tipo:
+        actividades = actividades.filter(tipo__icontains=tipo)
+
+    return render(
+        request,
+        'app_centro_cultural/actividades/lista_actividades.html',
+        {'actividades': actividades}
+    )
+
+def mostrar_actividades_monitores(request):
+    actividades = Actividad.objects.all()
+    monitor = request.GET.get('monitor')
+
+    if monitor:
+        actividades = actividades.filter(monitor__nombre__icontains=monitor)
+
+    return render(
+        request,
+        'app_centro_cultural/actividades/lista_actividades.html',
+        {'actividades': actividades}
+    )
+
+def mostrar_usuarios_actividades(request):
+    usuarios = Usuario.objects.all()
+    nombre_actividad = request.GET.get('actividad')
+
+    if nombre_actividad:
+        usuarios = usuarios.filter(inscripcion__actividad__nombre__icontains=nombre_actividad)
+
+    return render(
+        request, 
+        'app_centro_cultural/usuarios/lista_usuarios.html', 
+        {'usuarios': usuarios})

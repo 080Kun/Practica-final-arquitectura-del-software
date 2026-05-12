@@ -1,7 +1,22 @@
 <!DOCTYPE html>
 <html lang="es">
+    <a href="{% url 'index' %}">Volver al inicio</a>
     <h1>Actividades disponibles</h1>
 
+    <form method="GET" action="{% url 'mostrar_actividades_tipos' %}">
+      <input type="text"
+            name="tipo"
+            placeholder="Tipo de actividad"
+            value="{{ request.GET.tipo }}"><button type="submit">Buscar</button>
+    </form>
+    <br>
+    <form method="GET" action="{% url 'mostrar_actividades_monitores' %}">
+        <input type="text" 
+            name="monitor" 
+            placeholder="Nombre del monitor" 
+            value="{{ request.GET.monitor }}"> <button type="submit">Buscar</button>
+    </form>
+    <br>
     <table border="1">
         <thead>
             <tr>

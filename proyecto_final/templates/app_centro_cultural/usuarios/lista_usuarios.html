@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
+    <a href="{% url 'index' %}">Volver al inicio</a>
     <h1>Usuarios registrados</h1>
+    <html lang="es">
+
+    <form method="GET" action="{% url 'mostrar_usuarios_actividades' %}">
+        <input type="text" 
+            name="actividad" 
+            placeholder="Nombre de la actividad" 
+            value="{{ request.GET.actividad }}"> <button type="submit">Buscar</button>
+    </form>
+    <br>
+    
     <table border="1">
         <thead>
             <tr>
