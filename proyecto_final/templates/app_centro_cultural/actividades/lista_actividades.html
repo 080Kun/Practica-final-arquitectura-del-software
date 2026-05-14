@@ -17,6 +17,7 @@
             value="{{ request.GET.monitor }}"> <button type="submit">Buscar</button>
     </form>
     <br>
+    <a href="{% url 'nueva_inscripcion'%}">Inscribir </a>
     <table border="1">
         <thead>
             <tr>
@@ -26,8 +27,7 @@
                 <th>Horario</th>
                 <th>Duraccion</th>
                 <th>Editar</th>
-                <th>Eliminar</th>             
-                <th>Inscribir</th>    
+                <th>Eliminar</th>                
             </tr>
         </thead>
         <tbody>
@@ -40,7 +40,6 @@
                 <td>{{ actividad.duración }}</td>
                 <td><a href="{% url 'editar_actividad' actividad.id %}">Editar </a></td>
                 <td><a href="{% url 'eliminar_actividad' actividad.id %}">Borrar </a></td>
-                <td><a href="{% url 'nueva_inscripcion' actividad.id %}">Inscribir </a></td>
             </tr>
             {% endfor %}
         </tbody>
