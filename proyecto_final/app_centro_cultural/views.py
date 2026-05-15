@@ -268,9 +268,8 @@ def lista_inscripciones(request, actividad_id):
         return JsonResponse({"error": "Actividad no encontrado"}, status=404)
     
 @csrf_exempt
-def nueva_inscripcion(request,actividad_id):
+def nueva_inscripcion(request):
     try:
-        actividad = Actividad.objects.get(id=actividad_id)
         if request.method == 'POST':
             form = InscripcionForm(request.POST)
             if form.is_valid():
@@ -278,12 +277,11 @@ def nueva_inscripcion(request,actividad_id):
                 existe = Inscripcion.objects.filter(actividad=inscripcion.actividad, usuario= inscripcion.usuario).exists()
                 if existe:
                     return JsonResponse({"error": "Inscripcion ya realizada"}, status=400)
-                inscripcion.actividad = actividad
                 inscripcion.save()
                 return redirect('lista_actividades')
         else:
             form = InscripcionForm()
-        return render(request, 'app_centro_cultural/formulario.html', {'form': form, 'titulo': 'Nueva Inscripcion para ' + actividad.nombre})
+        return render(request, 'app_centro_cultural/formulario.html', {'form': form, 'titulo': 'Nueva Inscripcion'})
     except Actividad.DoesNotExist:
         return JsonResponse({"error": "Actividad no encontrado"}, status=404)
     
@@ -325,7 +323,7 @@ def mostrar_actividades_monitores(request):
     monitor = request.GET.get('monitor')
 
     if monitor:
-        actividades = actividades.filter(monitor__nombre__icontains=monitor)
+        actividades = actividades.filter(monitor__nombre__iexact=monitor)
 
     return render(
         request,

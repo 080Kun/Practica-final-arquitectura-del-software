@@ -27,7 +27,8 @@
                 <th>Horario</th>
                 <th>Duraccion</th>
                 <th>Editar</th>
-                <th>Eliminar</th>                
+                <th>Eliminar</th>            
+                <th>Inscritos</th>        
             </tr>
         </thead>
         <tbody>
@@ -40,6 +41,7 @@
                 <td>{{ actividad.duración }}</td>
                 <td><a href="{% url 'editar_actividad' actividad.id %}">Editar </a></td>
                 <td><a href="{% url 'eliminar_actividad' actividad.id %}">Borrar </a></td>
+                <td><a href="{% url 'lista_inscripciones' actividad.id %}">Inscritos </a></td>
             </tr>
             {% endfor %}
         </tbody>
